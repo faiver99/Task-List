@@ -10,6 +10,7 @@ const cancelEditBtn = document.getElementById('cancelEditBtn');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
 const closeBtn = document.querySelector('.close-btn');
+require('dotenv').config();
 
 let currentTaskElement = null; // Variable para almacenar la tarea que se está editando o eliminando
 
