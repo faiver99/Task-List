@@ -14,7 +14,7 @@ const closeBtn = document.querySelector('.close-btn');
 let currentTaskElement = null; // Variable para almacenar la tarea que se está editando o eliminando
 
 // URL del backend (actualiza esta URL con la de tu backend en Render)
-const API_URL = API_URL;
+// const API_URL = 'https://task-list-7hz5.onrender.com';
 
 // Cargar tareas desde el backend
 async function loadTasks() {
