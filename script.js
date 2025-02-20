@@ -66,7 +66,11 @@ function addTaskToDOM(id, text, completed = false) {
     taskList.appendChild(li);
 }
 
+<<<<<<< HEAD
 // // Escuchar eventos en tiempo real
+=======
+// Escuchar eventos en tiempo real
+>>>>>>> b1028b451c9f862cf271677eeed4396450fbab56
 // socket.on('newTask', (newTask) => {
 //     addTaskToDOM(newTask._id, newTask.text, newTask.completed);
 // });
