@@ -7,9 +7,20 @@ const API_URL = 'https://task-list-7hz5.onrender.com';
 const taskInput = document.getElementById('taskInput');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
-const errorMessage = document.getElementById('error-message');
+const editModal = document.getElementById('editModal');
+const deleteModal = document.getElementById('deleteModal');
+const editTaskInput = document.getElementById('editTaskInput');
+const saveEditBtn = document.getElementById('saveEditBtn');
+const cancelEditBtn = document.getElementById('cancelEditBtn');
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+const closeBtn = document.querySelector('.close-btn');
+// require('dotenv').config();
 
-let currentTaskElement = null;
+let currentTaskElement = null; // Variable para almacenar la tarea que se está editando o eliminando
+
+// URL del backend (actualiza esta URL con la de tu backend en Render)
+// const API_URL = 'https://task-list-7hz5.onrender.com';
 
 // Cargar tareas desde el backend
 async function loadTasks() {
@@ -55,10 +66,10 @@ function addTaskToDOM(id, text, completed = false) {
     taskList.appendChild(li);
 }
 
-// Escuchar eventos en tiempo real
-socket.on('newTask', (newTask) => {
-    addTaskToDOM(newTask._id, newTask.text, newTask.completed);
-});
+// // Escuchar eventos en tiempo real
+// socket.on('newTask', (newTask) => {
+//     addTaskToDOM(newTask._id, newTask.text, newTask.completed);
+// });
 
 // Agregar una nueva tarea
 addTaskBtn.addEventListener('click', async () => {
