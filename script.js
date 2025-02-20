@@ -56,9 +56,9 @@ function addTaskToDOM(id, text, completed = false) {
 }
 
 // Escuchar eventos en tiempo real
-socket.on('newTask', (newTask) => {
-    addTaskToDOM(newTask._id, newTask.text, newTask.completed);
-});
+// socket.on('newTask', (newTask) => {
+//     addTaskToDOM(newTask._id, newTask.text, newTask.completed);
+// });
 
 // Agregar una nueva tarea
 addTaskBtn.addEventListener('click', async () => {
