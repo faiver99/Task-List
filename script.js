@@ -1,7 +1,5 @@
-
 // URL del backend (actualiza esta URL con la de tu backend en Render)
 const API_URL = 'https://task-list-7hz5.onrender.com';
-
 
 // Seleccionar elementos del DOM
 const taskInput = document.getElementById('taskInput');
@@ -14,13 +12,10 @@ const saveEditBtn = document.getElementById('saveEditBtn');
 const cancelEditBtn = document.getElementById('cancelEditBtn');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-const closeBtn = document.querySelector('.close-btn');
-// require('dotenv').config();
+const closeBtns = document.querySelectorAll('.close-btn');
+const errorMessage = document.getElementById('errorMessage');
 
 let currentTaskElement = null; // Variable para almacenar la tarea que se está editando o eliminando
-
-// URL del backend (actualiza esta URL con la de tu backend en Render)
-// const API_URL = 'https://task-list-7hz5.onrender.com';
 
 // Cargar tareas desde el backend
 async function loadTasks() {
@@ -66,7 +61,6 @@ function addTaskToDOM(id, text, completed = false) {
     taskList.appendChild(li);
 }
 
-
 // Agregar una nueva tarea
 addTaskBtn.addEventListener('click', async () => {
     const taskText = taskInput.value.trim();
@@ -98,6 +92,81 @@ addTaskBtn.addEventListener('click', async () => {
     } catch (error) {
         console.error('Error al agregar la tarea:', error.message);
         alert('No se pudo agregar la tarea. Inténtalo de nuevo.');
+    }
+});
+
+// Funciones para abrir y cerrar los modales
+function openEditModal(taskElement) {
+    currentTaskElement = taskElement;
+    editTaskInput.value = taskElement.querySelector('span').textContent;
+    editModal.style.display = 'block';
+}
+
+function closeEditModal() {
+    editModal.style.display = 'none';
+}
+
+function openDeleteModal(taskElement) {
+    currentTaskElement = taskElement;
+    deleteModal.style.display = 'block';
+}
+
+function closeDeleteModal() {
+    deleteModal.style.display = 'none';
+}
+
+// Event listeners para los botones de los modales
+closeBtns.forEach(btn => btn.addEventListener('click', () => {
+    closeEditModal();
+    closeDeleteModal();
+}));
+
+cancelEditBtn.addEventListener('click', closeEditModal);
+cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+
+saveEditBtn.addEventListener('click', async () => {
+    const newText = editTaskInput.value.trim();
+    if (newText === '') {
+        alert('El campo no puede estar vacío');
+        return;
+    }
+
+    try {
+        const taskId = currentTaskElement.dataset.id;
+        const response = await fetch(`${API_URL}/tasks/${taskId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: newText }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al actualizar la tarea');
+        }
+
+        currentTaskElement.querySelector('span').textContent = newText;
+        closeEditModal();
+    } catch (error) {
+        console.error('Error al actualizar la tarea:', error.message);
+        alert('No se pudo actualizar la tarea. Inténtalo de nuevo.');
+    }
+});
+
+confirmDeleteBtn.addEventListener('click', async () => {
+    try {
+        const taskId = currentTaskElement.dataset.id;
+        const response = await fetch(`${API_URL}/tasks/${taskId}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al eliminar la tarea');
+        }
+
+        currentTaskElement.remove();
+        closeDeleteModal();
+    } catch (error) {
+        console.error('Error al eliminar la tarea:', error.message);
+        alert('No se pudo eliminar la tarea. Inténtalo de nuevo.');
     }
 });
 

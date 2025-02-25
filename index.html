@@ -3,47 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tareas</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Task List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="/src/note.ico">
 </head>
 <body>
     <div class="container">
         <h1>Lista de Tareas</h1>
-        <div class="input-container">
-            <input type="text" id="taskInput" placeholder="Añade una nueva tarea..." />
-            <button id="addTaskBtn">Agregar</button>
-        </div>
+        <input type="text" id="taskInput" placeholder="Nueva tarea...">
+        <button id="addTaskBtn">Agregar Tarea</button>
+        <p id="errorMessage" style="display: none; color: red;">El campo no puede estar vacío</p>
         <ul id="taskList"></ul>
     </div>
 
-    <!-- Vista emergente para editar -->
+    <!-- Modal para editar tarea -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h2>Editar Tarea</h2>
-            <input type="text" id="editTaskInput" placeholder="Edita la tarea..." />
-            <div class="modal-buttons">
-                <button id="saveEditBtn">Guardar</button>
-                <button id="cancelEditBtn">Cancelar</button>
-            </div>
+            <input type="text" id="editTaskInput">
+            <button id="saveEditBtn">Guardar</button>
+            <button id="cancelEditBtn">Cancelar</button>
         </div>
     </div>
 
-    <!-- Vista emergente para confirmar eliminación -->
+    <!-- Modal para eliminar tarea -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h2>¿Estás seguro?</h2>
-            <p>¿Deseas eliminar esta tarea permanentemente?</p>
-            <div class="modal-buttons">
-                <button id="confirmDeleteBtn">Eliminar</button>
-                <button id="cancelDeleteBtn">Cancelar</button>
-            </div>
+            <h2>Eliminar Tarea</h2>
+            <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+            <button id="confirmDeleteBtn">Eliminar</button>
+            <button id="cancelDeleteBtn">Cancelar</button>
         </div>
     </div>
 
-    
-    <!--   <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script> -->
     <script src="script.js"></script>
 </body>
 </html>
