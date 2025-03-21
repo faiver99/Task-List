@@ -17,6 +17,31 @@ const errorMessage = document.getElementById('errorMessage');
 
 let currentTaskElement = null; // Variable para almacenar la tarea que se está editando o eliminando
 
+// Cargar tareas desde el backend con simulación de retraso
+async function loadTasks() {
+    try {
+        // Mostrar el spinner
+        spinner.style.display = 'block';
+
+        // Simular un retraso de 10 segundos
+        setTimeout(async () => {
+            const response = await fetch(`${API_URL}/tasks`);
+            if (!response.ok) {
+                throw new Error('Error al cargar las tareas');
+            }
+            const tasks = await response.json();
+            taskList.innerHTML = ''; // Limpiar la lista
+            tasks.forEach(task => addTaskToDOM(task._id, task.text, task.completed));
+
+            // Ocultar el spinner
+            spinner.style.display = 'none';
+        }, 10000); // Simular carga de 10 segundos
+    } catch (error) {
+        console.error('Error al cargar las tareas:', error.message);
+        spinner.style.display = 'none'; // Ocultar spinner en caso de error
+    }
+}
+
 // Cargar tareas desde el backend
 async function loadTasks() {
     try {
