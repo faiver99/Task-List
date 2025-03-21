@@ -1,16 +1,34 @@
-🌟 Funcionalidades Principales
-Agregar Tareas
-Los usuarios pueden agregar nuevas tareas escribiendo un texto en el campo de entrada y haciendo clic en el botón "Agregar".
-Si el campo está vacío, se muestra un mensaje de error justo encima del campo de entrada: "Ingrese una tarea primero" .
-Editar Tareas
-Los usuarios pueden editar el texto de una tarea existente haciendo clic en el botón "Editar" .
-Se abre una ventana emergente donde pueden modificar el texto y guardar los cambios.
-Eliminar Tareas
-Los usuarios pueden eliminar una tarea haciendo clic en el botón "Eliminar" .
-Se abre una ventana emergente de confirmación antes de proceder con la eliminación.
-Marcar Tareas como Completadas
-Los usuarios pueden marcar una tarea como completada haciendo clic en ella.
-Las tareas completadas se muestran con un estilo diferente (tachado y color gris).
-Actualización en Tiempo Real
-La lista de tareas se actualiza automáticamente en todos los dispositivos conectados cuando se agrega, edita o elimina una tarea, sin necesidad de recargar la página.
-Esto se logra mediante el uso de Socket.IO para la comunicación en tiempo real entre el frontend y el backend.
+# To-Do List App - Frontend
+
+Este es el código del frontend de una aplicación de lista de tareas (To-Do List) que interactúa con un backend para gestionar las tareas. A continuación se describe el funcionamiento del código JavaScript.
+
+## Descripción General
+
+Este script permite a los usuarios agregar, editar y eliminar tareas en una lista. La lista de tareas se sincroniza con un backend a través de una API REST. El backend se encuentra en la URL proporcionada en la constante `API_URL`.
+
+### Funcionalidades
+
+1. **Cargar Tareas:** Al cargar la página, el script obtiene las tareas existentes desde el backend y las muestra en la interfaz de usuario.
+2. **Agregar Nueva Tarea:** Permite agregar nuevas tareas a la lista mediante un formulario de entrada.
+3. **Editar Tareas:** Permite editar el texto de una tarea seleccionada.
+4. **Eliminar Tareas:** Permite eliminar una tarea de la lista.
+
+## Detalle del Código
+
+### 1. Variables y Elementos del DOM
+
+El código selecciona varios elementos del DOM para manipular la interfaz de usuario:
+
+```javascript
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
+const editModal = document.getElementById('editModal');
+const deleteModal = document.getElementById('deleteModal');
+const editTaskInput = document.getElementById('editTaskInput');
+const saveEditBtn = document.getElementById('saveEditBtn');
+const cancelEditBtn = document.getElementById('cancelEditBtn');
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+const closeBtns = document.querySelectorAll('.close-btn');
+const errorMessage = document.getElementById('errorMessage');
