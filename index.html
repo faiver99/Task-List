@@ -8,6 +8,12 @@
     <link rel="icon" href="favicon.ico" type="/src/note.ico">
 </head>
 <body>
+
+        <!-- Spinner (oculto inicialmente) -->
+    <div id="spinner" class="spinner" style="display: none;">
+      <div class="spinner-circle"></div>
+    </div>
+
     <div class="container">
         <h1>Lista de Tareas</h1>
         <input type="text" id="taskInput" placeholder="Nueva tarea...">
@@ -26,7 +32,7 @@
             <button id="cancelEditBtn">Cancelar</button>
         </div>
     </div>
-
+ 
     <!-- Modal para eliminar tarea -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
