@@ -44,6 +44,47 @@
         </div>
     </div>
 
+    
+    
+    <style>
+        #spinner {
+            /* Estilos para el spinner */
+            display: block;
+            width: 50px;
+            height: 50px;
+            /* etc. */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+ 
+        .hidden {
+            display: none;
+        }
+    </style>
+ 
+    <script>
+        const spinner = document.getElementById('spinner');
+        const button = document.getElementById('addTaskBtn');
+ 
+        button.addEventListener('click', async () => {
+            spinner.classList.remove('hidden'); // Mostrar spinner
+ 
+            try {
+                const response = await fetch('https://task-list-7hz5.onrender.com'); // Reemplaza con tu endpoint
+                const data = await response.json(); // O como se decodifique tu respuesta
+ 
+                // ... procesar la respuesta ...
+ 
+                spinner.classList.add('hidden'); // Ocultar spinner
+            } catch (error) {
+                console.error('Error:', error);
+                spinner.classList.add('hidden'); // Ocultar spinner
+            }
+        });
+    </script>
+
     <script src="script.js"></script>
 </body>
 </html>
